@@ -17,8 +17,18 @@ export class MemberListComponent implements OnInit {
   constructor(private memberService: MemberService) {}
 
   ngOnInit(): void {
-    this.memberService.getMembers().subscribe(data => {
-      this.members = data; // Data from Jakarta backend[cite: 5]
+    this.loadMembers();
+  }
+
+  loadMembers(): void {
+    this.memberService.getMembers().subscribe({
+      next: (data) => {
+        console.log('Data received from backend:', data);
+        this.members = data; // Data from Jakarta backend
+      },
+      error: (err) => {
+        console.error('Error fetching members. Check backend URL and CORS:', err);
+      }
     });
   }
 }
