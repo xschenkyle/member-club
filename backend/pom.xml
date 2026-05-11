@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.badminton</groupId>
+    <artifactId>badminton-jakarta-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <jakarta.ee.version>10.0.0</jakarta.ee.version>
+    </properties>
+
+    <dependencies>
+        <!-- Jakarta EE Web API (Includes JAX-RS, JSON-B, and CDI) -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>${jakarta.ee.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Optional: For local testing without a full app server -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-binding</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>badminton-api</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+            <!-- Add this Jetty plugin configuration -->
+           <plugin>
+              <groupId>org.eclipse.jetty</groupId>
+              <artifactId>jetty-maven-plugin</artifactId>
+              <version>11.0.15</version> <!-- Use 9.4.x for Java 8/javax, 11+ for Java 11+/jakarta -->
+              <configuration>
+                <scanIntervalSeconds>10</scanIntervalSeconds>
+                  <webApp>
+                    <contextPath>/club-api</contextPath>
+                  </webApp>
+              </configuration>
+           </plugin>
+        </plugins>
+    </build>
+</project>

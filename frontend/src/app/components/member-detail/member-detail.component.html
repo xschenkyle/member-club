@@ -1,0 +1,34 @@
+<div *ngIf="member" class="detail-container">
+  <h2>Member ID: {{ member.id }}</h2>
+  <hr>
+
+  <div *ngIf="!isEditing" class="view-mode">
+    <p><strong>Name:</strong> {{ member.firstName }} {{ member.lastName }}</p>
+    <p><strong>Email:</strong> {{ member.email }}</p>
+    <p><strong>Age:</strong> {{ member.age }}</p>
+    <p><strong>Sex:</strong> {{ member.sex }}</p>
+    <p><strong>Experience:</strong> {{ member.experienceYears }} years</p>
+    <p><strong>Registered:</strong> {{ member.registerDate }}</p>
+    <p><strong>Expires:</strong> {{ member.expirationDate }}</p>
+    <p><strong>Notes:</strong> {{ member.notes }}</p>
+    <button (click)="isEditing = true">Modify Detail Datas</button>
+  </div>
+
+  <form *ngIf="isEditing" (ngSubmit)="saveChanges()" class="edit-form">
+    <input [(ngModel)]="member.firstName" name="fName" placeholder="First Name">
+    <input [(ngModel)]="member.lastName" name="lName" placeholder="Last Name">
+    <input type="number" [(ngModel)]="member.age" name="age" placeholder="Age">
+    <input type="email" [(ngModel)]="member.email" name="email" placeholder="Email">
+    <input type="number" [(ngModel)]="member.experienceYears" name="exp" placeholder="Experience">
+    <input type="date" [(ngModel)]="member.expirationDate" name="expDate">
+    <textarea [(ngModel)]="member.notes" name="notes" placeholder="Notes"></textarea>
+    
+    <div class="button-group">
+      <button type="submit" class="save-btn">Save Changes</button>
+      <button type="button" (click)="isEditing = false">Cancel</button>
+    </div>
+  </form>
+
+  <br>
+  <a routerLink="/members">Back to List</a>
+</div>

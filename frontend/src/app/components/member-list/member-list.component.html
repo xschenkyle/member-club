@@ -1,0 +1,23 @@
+<div class="list-container">
+  <h2>Club Member List</h2>
+  <table class="member-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Sex</th>
+        <th>Age</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of members">
+        <td>{{ m.firstName }}</td>
+        <td>{{ m.lastName }}</td>
+        <td>{{ m.sex }}</td>
+        <td>{{ m.age }}</td>
+        <td><a [routerLink]="['/member-detail', m.id]">View/Modify ID: {{ m.id }}</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
