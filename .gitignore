@@ -1,0 +1,47 @@
+# === Root & System Files ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.history/
+
+# === Backend (Java/Maven/Jakarta) ===
+backend/target/
+backend/*.class
+backend/*.war
+backend/*.jar
+backend/*.ear
+backend/.mvn/timing.properties
+backend/.factorypath
+
+# === Frontend (Angular/Node.js) ===
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/tmp/
+frontend/out-tsc
+frontend/npm-debug.log*
+frontend/yarn-error.log*
+frontend/.sass-cache/
+frontend/coverage/
+
+# === IDE & Workspace Settings ===
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Eclipse
+.metadata/
+.recommenders/
+**/remote-systems-temp-files/
+**/.project
+**/.classpath
+**/.settings/
