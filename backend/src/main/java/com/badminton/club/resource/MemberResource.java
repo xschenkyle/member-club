@@ -61,6 +61,7 @@ public class MemberResource {
             e.printStackTrace();
         }
     }
+    
 
     @GET
     public List<Member> listAllMembers() {
