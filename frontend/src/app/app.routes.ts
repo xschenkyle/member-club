@@ -4,6 +4,6 @@ import { MemberDetailComponent } from './components/member-detail/member-detail.
 
 export const routes: Routes = [
   { path: 'members', component: MemberListComponent },
-  { path: 'member-detail/:id', component: MemberDetailComponent },
+  { path: 'member-detail/:id', component: MemberDetailComponent }, // Matches 'export class MemberDetailComponent'
   { path: '', redirectTo: '/members', pathMatch: 'full' }
 ];
