@@ -62,14 +62,21 @@ export class MemberDetailComponent implements OnInit {
 
   saveMember(): void {
     if (this.member) {
-      this.memberService.saveMember(this.member).subscribe({
+      // 1. Create a shallow copy for the payload
+      const payload = { ...this.member };
+
+      // 2. Defensive check: Convert empty strings to null for Java LocalDate compatibility
+      if (payload.expirationDate === '') payload.expirationDate = null as any;
+      if (payload.registerDate === '') payload.registerDate = null as any;
+
+      this.memberService.saveMember(payload).subscribe({
         next: (response) => {
-          console.log('Save successful:', response);
-          this.router.navigate(['/members']); // Redirect to list after success
+          console.log('Member saved:', response);
+          this.router.navigate(['/members']);
         },
         error: (err) => {
           console.error('Save failed:', err);
-          alert('Failed to save member. Please check backend connection.');
+          alert('Backend Error: Check if the date format is correct.');
         }
       });
     }
