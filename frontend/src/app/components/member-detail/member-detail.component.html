@@ -1,34 +1,80 @@
-<div *ngIf="member" class="detail-container">
-  <h2>Member ID: {{ member.id }}</h2>
-  <hr>
+<div class="container mt-4">
+    @if (member) {
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">{{ isNew ? 'Add New Member' : 'Edit Member Profile' }}</h3>
+            </div>
 
-  <div *ngIf="!isEditing" class="view-mode">
-    <p><strong>Name:</strong> {{ member.firstName }} {{ member.lastName }}</p>
-    <p><strong>Email:</strong> {{ member.email }}</p>
-    <p><strong>Age:</strong> {{ member.age }}</p>
-    <p><strong>Sex:</strong> {{ member.sex }}</p>
-    <p><strong>Experience:</strong> {{ member.experienceYears }} years</p>
-    <p><strong>Registered:</strong> {{ member.registerDate }}</p>
-    <p><strong>Expires:</strong> {{ member.expirationDate }}</p>
-    <p><strong>Notes:</strong> {{ member.notes }}</p>
-    <button (click)="isEditing = true">Modify Detail Datas</button>
-  </div>
+            <div class="card-body">
+                <form #memberForm="ngForm" (ngSubmit)="saveMember()">
+                    <div class="row g-3">
+                        <!-- First Name -->
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="member.firstName" name="firstName" required #fName="ngModel">
+                            <div [hidden]="fName.valid || fName.pristine" class="text-danger small">First name is required.</div>
+                        </div>
 
-  <form *ngIf="isEditing" (ngSubmit)="saveChanges()" class="edit-form">
-    <input [(ngModel)]="member.firstName" name="fName" placeholder="First Name">
-    <input [(ngModel)]="member.lastName" name="lName" placeholder="Last Name">
-    <input type="number" [(ngModel)]="member.age" name="age" placeholder="Age">
-    <input type="email" [(ngModel)]="member.email" name="email" placeholder="Email">
-    <input type="number" [(ngModel)]="member.experienceYears" name="exp" placeholder="Experience">
-    <input type="date" [(ngModel)]="member.expirationDate" name="expDate">
-    <textarea [(ngModel)]="member.notes" name="notes" placeholder="Notes"></textarea>
-    
-    <div class="button-group">
-      <button type="submit" class="save-btn">Save Changes</button>
-      <button type="button" (click)="isEditing = false">Cancel</button>
-    </div>
-  </form>
+                        <!-- Last Name -->
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="member.lastName" name="lastName" required #lName="ngModel">
+                            <div [hidden]="lName.valid || lName.pristine" class="text-danger small">Last name is required.</div>
+                        </div>
 
-  <br>
-  <a routerLink="/members">Back to List</a>
+                        <!-- Sex & Age -->
+                        <div class="col-md-4">
+                            <label class="form-label">Sex</label>
+                            <select class="form-select" [(ngModel)]="member.sex" name="sex">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Age</label>
+                            <input type="number" class="form-control" [(ngModel)]="member.age" name="age">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" [(ngModel)]="member.email" name="email">
+                        </div>
+
+                        <!-- Dates -->
+                        <div class="col-md-6">
+                            <label class="form-label">Registration Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="member.registerDate" name="registerDate">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Expiration Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="member.expirationDate" name="expirationDate">
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="col-12">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-control" [(ngModel)]="member.notes" name="notes" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-4 pt-3 border-top d-flex gap-2">
+                        <button type="button" class="btn btn-secondary" [routerLink]="['/members']">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-success px-4" [disabled]="!memberForm.form.valid">
+                            <i class="bi bi-save"></i> Save Member
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    } @else {
+        <div class="text-center mt-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2">Loading member data...</p>
+        </div>
+    }
 </div>

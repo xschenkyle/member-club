@@ -2,14 +2,19 @@ package com.badminton.club.model;
 
 import java.time.LocalDate;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
+
 public class Member {
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private int age; // Capture age[cite: 6]
     private String email;
     private String sex;
     private int experienceYears;
+    @JsonbDateFormat("yyyy-MM-dd")
     private LocalDate registerDate; // Register date[cite: 6]
+    @JsonbDateFormat("yyyy-MM-dd")
     private LocalDate expirationDate; // Expiration date[cite: 6]
     private String notes;
     private String password;
@@ -19,9 +24,12 @@ public class Member {
     // Standard Getters and Setters[cite: 6]
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public int getAge() { return age; }
+    public String getFirstName() {return firstName;	}
+	public void setFirstName(String firstName) {this.firstName = firstName;	}
+	public String getLastName() {return lastName;}
+	public void setLastName(String lastName) {this.lastName = lastName;	}
+
+	public int getAge() { return age; }
     public void setAge(int age) { this.age = age; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

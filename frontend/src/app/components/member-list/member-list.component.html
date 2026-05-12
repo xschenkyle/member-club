@@ -3,31 +3,31 @@
     <h2>Club Member List</h2>
     <button [routerLink]="['/member-detail/new']" class="add-btn">+ Add New Member</button>
   </div>
-  
+
   <table class="member-table">
     <thead>
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Sex</th>
-        <th>Age</th>
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let m of members">
-        <td>{{ m.firstName }}</td>
-        <td>{{ m.lastName }}</td>
-        <td>{{ m.sex }}</td>
-        <td>{{ m.age }}</td>
-        <td>
-          <a [routerLink]="['/member-detail', m.id]">View/Modify</a>
-        </td>
-      </tr>
-      <!-- Optional: Show message if list is empty -->
-      <tr *ngIf="members.length === 0">
-        <td colspan="5" style="text-align: center;">No members found.</td>
-      </tr>
-    </tbody>
+      <tbody>
+          @for (m of members; track $index) {
+              <tr>
+                  <td>{{ m.firstName }}</td>
+                  <td>{{ m.lastName }}</td>
+                  <td>
+                      <a [routerLink]="['/member-detail', m.id]">View/Modify</a>
+                  </td>
+              </tr>
+          } @empty {
+              <tr>
+                  <td colspan="5" style="text-align: center; padding: 20px;">
+                      No members found.
+                  </td>
+              </tr>
+          }
+      </tbody>
   </table>
 </div>
