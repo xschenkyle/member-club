@@ -35,4 +35,9 @@ export class AuthService {
     }
 
     login() { this.loggedIn = true; }
+
+    logout(): void {
+        this.loggedIn = false;
+        localStorage.removeItem('isLoggedIn');
+    }
 }

@@ -16,5 +16,6 @@ export const routes: Routes = [
     component: MemberDetailComponent,
     canActivate: [authGuard]
   },
-  { path: '', redirectTo: '/members', pathMatch: 'full' }
+  { path: '', redirectTo: 'members', pathMatch: 'full' },
+  { path: '**', redirectTo: 'members' }
 ];
