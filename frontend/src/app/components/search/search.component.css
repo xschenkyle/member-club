@@ -1,0 +1,7 @@
+.search-results {
+  position: absolute;
+  width: 100%;
+  z-index: 1050;
+  max-height: 600px;
+  overflow-y: auto;
+}

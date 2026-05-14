@@ -1,0 +1,57 @@
+<div class="container-fluid position-relative">
+
+  <div class="input-group shadow-sm">
+
+    <span class="input-group-text">
+      🔍
+    </span>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search badminton clubs, courts, coaches..."
+      [(ngModel)]="keyword"
+      (input)="onSearchChange()"
+      (blur)="clearResults()"
+    />
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Location"
+      [(ngModel)]="location"
+    />
+
+  </div>
+
+  @if (results.length > 0) {
+
+    <div class="search-results dropdown-menu show w-100 mt-1 p-0 shadow-lg border-0">
+
+      @for (result of results; track result.link) {
+
+        <a
+          [href]="result.link"
+          target="_blank"
+          class="dropdown-item d-block p-3 border-bottom"
+        >
+
+          <div class="fw-bold text-primary">
+            {{ result.title }}
+          </div>
+
+          <div class="small text-success">
+            {{ result.link }}
+          </div>
+
+          <div class="small text-muted mt-1">
+            {{ result.snippet }}
+          </div>
+
+        </a>
+      }
+
+    </div>
+  }
+
+</div>
